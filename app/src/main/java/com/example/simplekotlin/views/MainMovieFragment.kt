@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainMovieFragment : Fragment(R.layout.fragment_main_movie) {
 
+
     private val TAG = "MainMovieFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,18 +33,18 @@ class MainMovieFragment : Fragment(R.layout.fragment_main_movie) {
 
         val countryRequest = service.listMovies("8ed700250305de124bef08dbb686472a")
 
-//        countryRequest.enqueue(object : Callback<List<Country>> {
-//            override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
-//                val allCountry = response.body()
-//                for (c in allCountry!!)
-//                    Log.d(TAG, "onResponse: ${c.name} \n" + " CAPITAL: ${c.capital} \n" + " Language: ${c.languages} ")
-//            }
-//
-//            override fun onFailure(call: Call<List<Country>>, t: Throwable) {
-//                Log.d(TAG, "onFailure: " + t.localizedMessage)
-//            }
-//
-//        })
+        countryRequest.enqueue(object : Callback<List<Country>> {
+            override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
+                val allCountry = response.body()
+                for (c in allCountry!!)
+                    Log.d(TAG, "onResponse: ${c.name} \n" + " CAPITAL: ${c.capital} \n" + " Language: ${c.languages} ")
+            }
+
+            override fun onFailure(call: Call<List<Country>>, t: Throwable) {
+                Log.d(TAG, "onFailure: " + t.localizedMessage)
+            }
+
+        })
 
         countryRequest.enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
