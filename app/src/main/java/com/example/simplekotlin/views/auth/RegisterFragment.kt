@@ -1,4 +1,4 @@
-package com.example.simplekotlin.views
+package com.example.simplekotlin.views.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.simplekotlin.R
 import com.example.simplekotlin.models.Country
 import com.example.simplekotlin.models.MovieResponse
+import com.example.simplekotlin.models.SingleMovieResponse
 import com.example.simplekotlin.network.CountriesService
 import kotlinx.android.synthetic.main.fragment_welcome.*
 import retrofit2.Call
@@ -33,28 +34,15 @@ class MainMovieFragment : Fragment(R.layout.fragment_main_movie) {
 
         val countryRequest = service.listMovies("8ed700250305de124bef08dbb686472a")
 
-        countryRequest.enqueue(object : Callback<List<Country>> {
-            override fun onResponse(call: Call<List<Country>>, response: Response<List<Country>>) {
-                val allCountry = response.body()
-                for (c in allCountry!!)
-                    Log.d(TAG, "onResponse: ${c.name} \n" + " CAPITAL: ${c.capital} \n" + " Language: ${c.languages} ")
-            }
-
-            override fun onFailure(call: Call<List<Country>>, t: Throwable) {
-                Log.d(TAG, "onFailure: " + t.localizedMessage)
-            }
-
-        })
-
-        countryRequest.enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+        countryRequest.enqueue(object : Callback<SingleMovieResponse> {
+            override fun onResponse(call: Call<SingleMovieResponse>, response: Response<SingleMovieResponse>) {
                 Log.d(TAG, "onResponse: ${response.isSuccessful}")
                 val movieResponse = response.body()
                 Log.d(TAG, "onResponse: $movieResponse")
 
             }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SingleMovieResponse>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.localizedMessage}")
             }
 

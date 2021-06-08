@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.simplekotlin.views.LoginFragment"
+        android:name="com.example.simplekotlin.views.auth.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/to_mainMovieFragment2"
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.simplekotlin.views.RegisterFragment"
+        android:name="com.example.simplekotlin.views.auth.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/o_mainMovieFragment2"
