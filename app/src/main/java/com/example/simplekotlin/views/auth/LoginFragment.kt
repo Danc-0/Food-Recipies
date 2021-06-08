@@ -2,20 +2,19 @@ package com.example.simplekotlin.views.auth
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.simplekotlin.R
 import com.example.simplekotlin.databinding.FragmentLoginBinding
-import com.example.simplekotlin.utils.toastMessage
-import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class LoginFragment : Fragment(), AuthListener {
+
+    private val TAG = "LoginFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +27,18 @@ class LoginFragment : Fragment(), AuthListener {
     }
 
     override fun onStarted() {
-        super.onStarted()
         Toast.makeText(context, "Login started", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSuccess() {
-        super.onSuccess()
-        Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show()
+    override fun onSuccess(loginResponse: LiveData<String>) {
+        loginResponse.observe(this, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "onSuccess: $it")
+        })
+
     }
 
     override fun onFailure(message: String) {
-        super.onFailure(message)
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

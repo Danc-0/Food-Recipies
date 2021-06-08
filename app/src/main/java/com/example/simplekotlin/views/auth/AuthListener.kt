@@ -1,15 +1,13 @@
 package com.example.simplekotlin.views.auth
 
+import androidx.lifecycle.LiveData
+
 interface AuthListener {
 
-    fun onStarted() {
+    fun onStarted()
 
-    }
+    fun onSuccess(loginResponse: LiveData<String>)
 
-    fun onSuccess() {
-    }
-
-    fun onFailure(message: String) {
-    }
+    fun onFailure(message: String)
 
 }
